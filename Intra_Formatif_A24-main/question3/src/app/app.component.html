@@ -1,0 +1,71 @@
+<mat-toolbar style="display: flex;">
+  <mat-icon style="margin-right: 8px">class</mat-icon>
+  <span>Super Form Infini</span>
+  <span style="flex: 1 1 auto;"></span>
+</mat-toolbar>
+
+<h1>Formulaire qui sert à rien</h1>
+<mat-card style="width: 700px; margin: auto; padding: 20px;">
+  <form [formGroup]="form">
+
+    <!-- Nom Field -->
+    <mat-form-field style="width: 100%">
+      <mat-label>Nom</mat-label>
+      <input matInput type="text" placeholder="Nom et prénom" name="name" formControlName="name">
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        Votre nom est requis
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Numéro de rue Field -->
+    <mat-form-field style="width: 100%">
+      <mat-label>Numéro de rue</mat-label>
+      <input matInput type="number" placeholder="5230" name="roadnumber" formControlName="roadnumber">
+      <mat-error *ngIf="form.get('roadnumber')?.hasError('required')">
+        Votre numéro de rue est requis
+      </mat-error>
+      <mat-error *ngIf="form.get('roadnumber')?.hasError('min') || form.get('roadnumber')?.hasError('max')">
+        Le numéro de rue doit être compris entre 1000 et 9999
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Rue Field -->
+    <mat-form-field style="width: 100%">
+      <mat-label>Rue</mat-label>
+      <input matInput type="text" placeholder="Resther" name="road" formControlName="road">
+      <mat-error *ngIf="form.get('road')?.hasError('required')">
+        Votre nom de rue est requis
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Code Postal Field -->
+    <mat-form-field style="width: 100%">
+      <mat-label>Code Postal</mat-label>
+      <input matInput type="text" placeholder="H2J8B2" name="postalcode" formControlName="postalcode">
+      <mat-error *ngIf="form.get('postalcode')?.hasError('pattern')">
+        Le code postal n'est pas valide.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Commentaire Field -->
+    <mat-form-field style="width: 100%">
+      <mat-label>Commentaire</mat-label>
+      <textarea matInput placeholder="Votre commentaire" name="comments" formControlName="comments"></textarea>
+
+      <!-- Length Error -->
+      <mat-error *ngIf="form.get('comments')?.hasError('commentLenghtValidator')">
+        Votre commentaire doit contenir au moins 10 caractères.
+      </mat-error>
+
+      <!-- Name Contain Error -->
+      <mat-error *ngIf="form.hasError('commentContainNameValidator')">
+        Le commentaire ne doit pas contenir votre nom.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" [disabled]="!form.valid">Acheter</button>
+    </mat-card-actions>
+  </form>
+</mat-card>
