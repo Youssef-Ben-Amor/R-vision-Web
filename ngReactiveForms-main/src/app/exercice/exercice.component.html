@@ -1,0 +1,28 @@
+<mat-card class="artist-card" style="margin: 16px; padding: 16px;">
+  <form [formGroup]="catForm">
+    <mat-error *ngIf="catForm.hasError('atLeastOneMistake')">
+      N'importe quoi!
+    </mat-error>
+    <mat-form-field style="width: 100%">
+      <label>Quel est votre animal favoris?</label>
+      <input matInput placeholder="Il faut répondre chat" formControlName="questionA" name="questionA">
+      <mat-error *ngIf="catForm.get('questionA')?.errors?.['doesntLoveCats']">
+        Vous devez préférer les chats!
+      </mat-error>
+      <mat-error *ngIf="catForm.get('questionA')?.hasError('required')">
+        Cettre réponse est <strong>requise</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+      <label>Aimez-vous mieux les chats que l'informatique?</label>
+      <input matInput type="text" placeholder="Il faut écrire oui" formControlName="questionB" name="questionB">
+      <mat-error *ngIf="catForm.get('questionB')?.hasError('doesntPreferCats')">
+        Vous devez répondre oui!
+      </mat-error>
+      <mat-error *ngIf="catForm.get('questionB')?.hasError('required')">
+        Cettre réponse est <strong>requise</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="!catForm.valid">Enregistrer</button>
+  </form>
+</mat-card>

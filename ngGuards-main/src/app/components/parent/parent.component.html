@@ -1,0 +1,12 @@
+<ul style="list-style:none">
+  <li>
+    <mat-checkbox [(ngModel)]="sweet" (ngModelChange)="updateSweet()">J’aime les choses sucrées!</mat-checkbox>
+  </li>
+  <li>
+    <mat-checkbox [(ngModel)]="salty" (ngModelChange)="updateSalty()">J’aime les choses salées!</mat-checkbox>
+  </li>
+</ul>
+
+<a href="/caramelAuSel">J'ai faim</a>
+<br>
+<router-outlet> </router-outlet>
